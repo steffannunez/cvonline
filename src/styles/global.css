@@ -1,0 +1,197 @@
+/* ─────────────────────────────────────────────────────────────
+   Design tokens — paleta dark dev neón
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --bg: #0d1117;
+  --bg-soft: #111722;
+  --bg-card: #161b26;
+  --border: #232a36;
+  --border-glow: #2f3b4d;
+
+  --text: #e6edf3;
+  --text-soft: #9aa7b6;
+  --text-dim: #6b7888;
+
+  --accent: #39d353;
+  --accent-soft: #2ea043;
+  --accent-dim: rgba(57, 211, 83, 0.12);
+  --accent-glow: rgba(57, 211, 83, 0.35);
+  --cyan: #56d4dd;
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --maxw: 1080px;
+  --radius: 14px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Reset
+   ───────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Fondo: grilla sutil + glow radial que sigue la página */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.25;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(600px circle at 15% 10%, var(--accent-dim), transparent 60%),
+    radial-gradient(500px circle at 85% 30%, rgba(86, 212, 221, 0.08), transparent 60%);
+  pointer-events: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Layout helpers
+   ───────────────────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+section {
+  padding-block: 6rem;
+  position: relative;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.section-label::before {
+  content: "//";
+  color: var(--text-dim);
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 2.5rem;
+  line-height: 1.1;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.accent {
+  color: var(--accent);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Scroll reveal — IntersectionObserver añade .is-visible
+   ───────────────────────────────────────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal="left"] {
+  transform: translateX(-40px);
+}
+[data-reveal="right"] {
+  transform: translateX(40px);
+}
+[data-reveal="scale"] {
+  transform: scale(0.92);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Parallax suave: el JS actualiza --parallax con el scroll */
+[data-parallax] {
+  transform: translateY(calc(var(--parallax, 0) * 1px));
+  will-change: transform;
+}
+
+/* Barra de progreso de scroll */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  transform-origin: 0 50%;
+  transform: scaleX(var(--progress, 0));
+  background: linear-gradient(90deg, var(--accent), var(--cyan));
+  box-shadow: 0 0 12px var(--accent-glow);
+  z-index: 100;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Accesibilidad: respetar prefers-reduced-motion
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  [data-reveal],
+  [data-parallax] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

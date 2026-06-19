@@ -1,0 +1,96 @@
+---
+import { education, languages } from "../data/cv";
+---
+
+<section id="formacion">
+  <div class="container two-col">
+    <div class="block" data-reveal="left">
+      <p class="section-label">educación</p>
+      <h2 class="section-title">Formación</h2>
+      <ul class="list">
+        {
+          education.map((e) => (
+            <li>
+              <span class="year mono">{e.year}</span>
+              <div>
+                <h3>{e.degree}</h3>
+                <p>{e.school}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="block" data-reveal="right">
+      <p class="section-label">idiomas</p>
+      <h2 class="section-title">Idiomas</h2>
+      <ul class="langs">
+        {
+          languages.map((l) => (
+            <li>
+              <span class="lang">{l.lang}</span>
+              <span class="level mono">{l.level}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .two-col {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 3rem;
+  }
+  .list {
+    list-style: none;
+    display: grid;
+    gap: 1.5rem;
+  }
+  .list li {
+    display: flex;
+    gap: 1.25rem;
+  }
+  .year {
+    color: var(--accent);
+    font-size: 0.9rem;
+    padding-top: 0.2rem;
+    min-width: 3rem;
+  }
+  .list h3 {
+    font-size: 1.02rem;
+  }
+  .list p {
+    color: var(--text-soft);
+    font-size: 0.92rem;
+  }
+  .langs {
+    list-style: none;
+    display: grid;
+    gap: 0.9rem;
+  }
+  .langs li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 1.1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .lang {
+    font-weight: 600;
+  }
+  .level {
+    color: var(--cyan);
+    font-size: 0.85rem;
+  }
+  @media (max-width: 760px) {
+    .two-col {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,85 @@
+---
+const links = [
+  { href: "#top", label: "Inicio" },
+  { href: "#skills", label: "Skills" },
+  { href: "#experiencia", label: "Experiencia" },
+  { href: "#proyectos", label: "Proyectos" },
+  { href: "#contacto", label: "Contacto" },
+];
+---
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="brand mono">
+      <span class="accent">~/</span>estefan<span class="blink">_</span>
+    </a>
+    <nav>
+      <ul>
+        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(12px);
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .brand {
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+  }
+  .blink {
+    animation: blink 1.1s step-end infinite;
+    color: var(--accent);
+  }
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  nav ul {
+    display: flex;
+    gap: 1.75rem;
+    list-style: none;
+  }
+  nav a {
+    font-size: 0.92rem;
+    color: var(--text-soft);
+    transition: color 0.2s var(--ease);
+    position: relative;
+  }
+  nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.25s var(--ease);
+  }
+  nav a:hover {
+    color: var(--text);
+  }
+  nav a:hover::after {
+    width: 100%;
+  }
+  @media (max-width: 720px) {
+    nav {
+      display: none;
+    }
+  }
+</style>
