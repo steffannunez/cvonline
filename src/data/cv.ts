@@ -48,6 +48,13 @@ export const profile = {
     'Ingeniero de Software con más de 5 años de experiencia en desarrollo full stack, especializado en arquitecturas de microservicios escalables con TypeScript, Node.js y frameworks modernos como NestJS, Next.js y Vue.js. Experto en soluciones cloud-native sobre AWS, Azure, Vercel y Supabase. Actualmente Technical Lead en la Cámara de Comercio de Santiago (vía Leytonmedia), liderando un equipo de 9 ingenieros sobre una arquitectura BFF de 15 frontends y 11 backends. Apasionado por Clean Code, SOLID y CI/CD en entornos ágiles, con experiencia adicional en entrenamiento de modelos de IA y desarrollo de herramientas MCP.',
 };
 
+// CV descargable. El archivo vive en /public.
+// Cuando exportes el PDF, ponelo en /public y cambiá `file` a 'CV-Estefan-Nunez-2026.pdf'.
+export const resume = {
+  file: 'CV-Estefan-Nunez-2026.docx',
+  label: 'Descargar CV',
+};
+
 export const contact: Contact = {
   email: 'brandon.nunez@usach.cl',
   phone: '(+56) 9 9090 9063',
@@ -232,16 +239,19 @@ export const experience: Job[] = [
 export const projects: Project[] = [
   {
     name: 'endreams.com',
+    url: 'https://endreams.com',
     description: 'Plataforma de generación y edición de imágenes y videos con IA.',
     stack: ['React', 'Next.js', 'TypeScript', 'APIs generativas'],
   },
   {
     name: 'chronolimit.com',
+    url: 'https://chronolimit.com',
     description: 'App de gestión de metas con sistema de financiamiento integrado y contadores de tiempo.',
     stack: ['React', 'Next.js', 'Supabase'],
   },
   {
     name: 'med.vrandy.cl',
+    url: 'https://med.vrandy.cl',
     description: 'Marketplace para cirujanos plásticos y medicina estética (próximo lanzamiento).',
     stack: ['React', 'Next.js', 'Supabase'],
   },

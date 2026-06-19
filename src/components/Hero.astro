@@ -1,5 +1,7 @@
 ---
-import { profile, contact, stats } from "../data/cv";
+import { profile, contact, stats, resume } from "../data/cv";
+
+const resumeHref = `${import.meta.env.BASE_URL}${resume.file}`;
 ---
 
 <section id="top" class="hero">
@@ -26,6 +28,9 @@ import { profile, contact, stats } from "../data/cv";
 
       <div class="cta" data-reveal style="--reveal-delay: 400ms">
         <a class="btn primary" href="#contacto">Contactame</a>
+        <a class="btn download" href={resumeHref} download>
+          <span class="mono">↓</span> {resume.label}
+        </a>
         <a class="btn ghost" href="#proyectos">Ver proyectos →</a>
       </div>
     </div>
@@ -156,6 +161,15 @@ import { profile, contact, stats } from "../data/cv";
   .btn.ghost:hover {
     border-color: var(--accent);
     color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .btn.download {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    background: color-mix(in srgb, var(--cyan) 8%, transparent);
+  }
+  .btn.download:hover {
+    background: color-mix(in srgb, var(--cyan) 16%, transparent);
     transform: translateY(-2px);
   }
 
